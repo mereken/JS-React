@@ -1,4 +1,3 @@
-
 function getUserCB(id, cb) {
     setTimeout(() => cb(null, { id, name: "User" + id }), 200);
 }
@@ -28,11 +27,10 @@ function promisify(fn) {
     };
 }
 
-
 // TODO: create wrappers using promisify
-const getUserP   = /* TODO */ null;
-const getOrdersP = /* TODO */ null;
-const getRecsP   = /* TODO */ null;
+const getUserP   = promisify(getUserCB);
+const getOrdersP = promisify(getOrdersCB);
+const getRecsP   = promisify(getRecsCB);
 
 /* ──────────────────────────────────────────────────────────────────────────
    - After fetching user and orders, INSERT a step that rejects with
@@ -48,10 +46,14 @@ function runSequential() {
             return getOrdersP(user.id).then(orders => ({ user, orders }));
         })
         .then(({ user, orders }) => {
-            // TODO: business-rule failure here
-
-            throw new Error("TODO: add business-rule check & continue chain");
+            if (orders.length === 0) {
+                throw new Error("No orders");
+            }
+            return getRecsP(user.id).then(recommendations => ({
+                user, orders, recommendations
+            }));
         })
+
         .then(({ user, orders, recommendations }) => {
             console.log("final (sequential):", { user, orders, recommendations });
         })
@@ -73,9 +75,12 @@ function runParallel() {
     console.log("— PARALLEL —");
     return getUserP(2)
         .then(user => {
-            // TODO: run both in parallel using Promise.all and then log result
-
-            throw new Error("TODO: implement Promise.all fan-out");
+            return Promise.all([
+                getOrdersP(user.id),
+                getRecsP(user.id)
+            ]).then(([orders, recommendations]) => ({
+                user, orders, recommendations
+            }));
         })
         .then(({ user, orders, recommendations }) => {
             console.log("final (parallel):", { user, orders, recommendations });
@@ -98,7 +103,13 @@ function runRaceOptional() {
     const p1 = new Promise(res => setTimeout(() => res("p1"), 120));
     const p2 = new Promise(res => setTimeout(() => res("p2"), 60));
     // TODO:practice  Promise.race return then (winner as console.log("race winner:", winner));
-    console.log("TODO: implement Promise.race");
+    return Promise.race([p1, p2])
+        .then(winner => {
+            console.log("race winner: ", winner);
+        })
+        .finally(() => {
+            console.log("done (race)");
+        });
 }
 
 /* ──────────────────────────────────────────────────────────────────────────

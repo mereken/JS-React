@@ -10,24 +10,44 @@ function runA1() {
     // 2) Rectangle
     // TODO(a): Make Rectangle a constructor that calls the parent (Shape) and
     //          stores width/height on the instance.
-    function Rectangle(width, height) { /* TODO */ }
+    function Rectangle(width, height) {
+        Shape.call(this);
+
+        this.width = width;
+        this.height = height;
+    }
 
     // TODO(b): Prototype chain — link Rectangle.prototype -> Shape.prototype
     //          and restore Rectangle.prototype.constructor.
-    // Rectangle.prototype = ...
-    // Rectangle.prototype.constructor = ...
+    Rectangle.prototype = Object.create(Shape.prototype);
+    Rectangle.prototype.constructor = Rectangle;
 
     // TODO(c): Override getArea() on Rectangle.prototype to return width*height.
-    // Rectangle.prototype.getArea = function(){ /* TODO */ };
+    Rectangle.prototype.getArea = function(){ 
+        return this.width * this.height;
+    };
 
     // TODO(d): Override describe() on Rectangle.prototype. Call the parent
     //          describe via Shape.prototype.describe.call(this) and append
     //          " Rectangle WxH".
-    // Rectangle.prototype.describe = function(){ /* TODO */ };
 
-    // 3) Square
-    // TODO(e): Square(side) should call Rectangle with width=height=side.
-    function Square(side) { /* TODO */ }
+    Rectangle.prototype.describe = function(){
+        let baseDescription = Shape.prototype.describe.call(this);
+        return baseDescription + " Rectangle " + this.width + "x" + this.height;
+    };
+
+    
+    function Square(side) { 
+        Rectangle.call(this, side, side);
+    }
+    Square.prototype = Object.create(Rectangle.prototype);
+    Square.prototype.constructor = Square;
+
+    Square.prototype.describe = function(){
+        let rectDescription = Rectangle.prototype.describe.call(this);
+        return rectDescription + "Square side=" + this.width;
+    }
+    
 
     // TODO(f): Prototype chain — link Square.prototype -> Rectangle.prototype
     //          and restore Square.prototype.constructor.
@@ -69,3 +89,4 @@ function runA1() {
         console.log("Runtime error:", e.message);
     }
 }
+runA1();
