@@ -1,0 +1,37 @@
+body { 
+  font-family: 'Raleway', sans-serif; 
+  background-color:#f5baba24; 
+  
+}
+.about-content {
+  max-width: 800px;
+  margin: 30px 180px;
+  padding-right: 70px;
+}
+.about-content h2 {
+  font-size: 30px;
+  line-height: 45px;
+  margin-bottom: 30px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #3f2020;
+}
+.about-content p {
+  font-weight: 300;
+  color:#3f2020;
+  font-size: 18px;
+}
+.btn-black {
+  color: #efe0e0;
+  background-color: rgba(0, 0, 0, 1);
+  transition: 0.5s;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+.btn-black:hover {
+  color: #3b1818;
+  background-color: rgba(207, 175, 175, 0.8);
+  transition: 0.5s;
+}
