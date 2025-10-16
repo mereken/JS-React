@@ -4,14 +4,45 @@
   margin: 2rem auto 0;
   
   display: grid; 
-  
-  grid-template-columns: repeat(2, 1fr); 
+  grid-template-columns: repeat(3, 1fr); 
   gap: 30px; 
   max-width: 650px; 
+
+  justify-content: center;  
 }
 
 .empty-list-message {
     margin-top: 2rem;
     color: #555;
     font-size: 1.1rem;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1.5rem;
+}
+
+.search-input {
+  padding: 0.5rem 0.8rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 200px;
+}
+
+.clear-btn {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+
+}
+
+.clear-btn:hover {
+  background-color: #cc0000;
 }
