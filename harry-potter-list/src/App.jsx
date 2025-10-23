@@ -72,7 +72,6 @@ function App() {
         {loading ? "Loading..." : "Load New Meals"}
       </button>
 
-      {/* передаем массив из двух блюд в MealList */}
       <MealList meals={meals} />
     </div>
   );

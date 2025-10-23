@@ -1,10 +1,20 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MealCard from './MealCard';
 import './MealList.css'; 
 
 const MealList = ({ meals }) => {
   const [searchBar, setSearchBar] = useState('');
+  const [updateMessage, setUpdateMessage] = useState('');
+
+  useEffect(() => {
+    if (meals.length > 0) {
+      setUpdateMessage(`Meal list updated! (${meals.length} items loaded )`);
+      const timer = setTimeout(() => setUpdateMessage(''), 3000); // исчезает через 3 секунды
+      return () => clearTimeout(timer);
+    }
+  }, [meals]);
+
   if (meals.length === 0) {
     return <div className="empty-list-message">Click the button to load a random Seafood meal!</div>;
   }
@@ -14,7 +24,15 @@ const MealList = ({ meals }) => {
   ));
 
   return (
-    <><div className="search-container">
+    <>
+    {updateMessage && (
+        <div className="update-message">
+          {updateMessage}
+        </div>
+      )}
+    
+    
+    <div className="search-container">
       <input
         type="text"
         placeholder="Search..."
