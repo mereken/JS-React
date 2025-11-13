@@ -1,6 +1,5 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 import './MealCard.css'; 
-
 
 const MealCard = ({ meal }) => {
   return (
@@ -9,9 +8,10 @@ const MealCard = ({ meal }) => {
         <img src={meal.strMealThumb} alt={meal.strMeal} />
         <section>
           <h2>{meal.strMeal}</h2>
-          <p><strong>Category:</strong> {meal.strCategory || 'N/A'}</p>
-          <p><strong>Area:</strong> {meal.strArea || 'N/A'}</p>
-          <p><strong>Tags:</strong> {meal.strTags || "No tags"}</p>
+          <p><strong>Category:</strong> {meal.strCategory}</p>
+          <Link to={`/items/${meal.idMeal}`} style={{ textDecoration: 'none' }}>
+             <button className="load-btn" style={{marginTop: '10px', width: '100%'}}>View Details</button>
+          </Link>
         </section>
       </div>
     </li>

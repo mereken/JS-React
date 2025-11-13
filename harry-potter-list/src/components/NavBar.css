@@ -1,0 +1,36 @@
+.navbar {
+  background-color: var(--white);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 4px solid var(--ocean-blue); 
+}
+.nav-brand {
+  color: var(--ocean-blue);
+  font-weight: 800;
+  font-size: 1.8rem;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: var(--ocean-dark);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 5px 10px;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: var(--ocean-blue);
+}
