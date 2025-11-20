@@ -1,0 +1,29 @@
+.profile-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: var(--white);
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-details {
+    margin: 2rem 0;
+    text-align: left;
+    padding: 0 1rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.profile-details strong {
+    color: var(--ocean-dark);
+}
+
+.logout-btn-danger {
+    background-color: #d9534f; 
+}
+
+.logout-btn-danger:hover {
+    background-color: #c9302c;
+}

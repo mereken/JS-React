@@ -2,32 +2,32 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import ErrorBox from "../components/ErrorBox";
-import '../components/AuthForm.css'
+import '../components/AuthForm.css';
 
-const Login = () => {
+const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { signup } = useAuth();
   const navigate = useNavigate();
 
-
-  const handleSubmit = async (e) =>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
-    try{
-      await login(email, password);
+    try {
+      await signup(email, password);
       navigate("/profile");
-    }catch(err){
-      setError("Failed to log in: " + err.message);
+    } catch (err) {
+      setError("Failed to create an account: " + err.message);
     }
     setLoading(false);
-  }
+  };
+
   return (
     <div className="auth-container"> 
-      <h1>Log In</h1>
+      <h1>Sign Up</h1>
       {error && <ErrorBox message={error} />}
       <form onSubmit={handleSubmit} className="auth-form"> 
         <input
@@ -45,14 +45,14 @@ const Login = () => {
           required
         />
         <button disabled={loading} type="submit" className="load-btn">
-          {loading ? "Logging In..." : "Log In"}
+          {loading ? "Signing Up..." : "Sign Up"}
         </button>
       </form>
-      <p className="auth-footer">
-        Need an account? <Link to="/signup">Sign Up</Link>
+      <p className="auth-footer"> 
+        Already have an account? <Link to="/login">Log In</Link>
       </p>
     </div>
   );
 };
 
-export default Login;
+export default Signup;
