@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { searchMeals, getMealById } from "../services/mealService"; 
 
-
 export const fetchItems = createAsyncThunk(
   "items/fetchItems",
   async (query) => {
